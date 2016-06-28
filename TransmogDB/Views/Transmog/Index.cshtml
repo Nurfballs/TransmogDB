@@ -5,35 +5,33 @@
 }
 
 <div class="jumbotron">
-    <h1>Welcome!</h1>
-    <p class="lead">Transmog McFuckin' Database Yo!</p>
+    <h1>Transmog Database</h1>
+    <p class="lead">@ViewBag.totalAppearances total transmogrifications captured.</p>
     <p><a href="#" class="btn btn-primary btn-lg">How does it work? &raquo;</a></p>
 </div>
 
 
+
 <div class="row">
-    @foreach (var item in Model)
-    {
-        <div class="col-md-3">
-            <div class="card">
-                
-                <h4 class="card-header">@Html.DisplayFor(modelItem => item.Name)<small> of @Html.DisplayFor(modelItem => item.Realm)</small></h4>
-                <img class="img-fluid" src="@item.Image" />
-                <div class="card-block">
-                    <p class="card-text">
-                        <ul>
-                            <li>Item 1</li>
-                            <li>Item 2</li>
-                            <li>Item 3</li>
-                            <li>Item 4</li>
-                            <li>Item 5</li>
-                        </ul>
-                    </p>
+    <div class="card-group">
+        <div class="col-md-12">
+            @foreach (var item in Model)
+            {
+
+                <div class="card">
+                    <div class="card-header">
+                        <h4><small>[@Html.DisplayFor(modelItem => item.ID)]</small> @Html.DisplayFor(modelItem => item.Name)</h4>
+                        <h6 class="text-muted">of @Html.DisplayFor(modelItem => item.Realm)</h6>
+                    </div>
+                    <img class="img-fluid" src="@item.Image" />
+                    <div class="card-block">
+                        
+                    </div>
+
                 </div>
 
-            </div>
+            }
         </div>
-    }
-
+    </div>
 </div>
 

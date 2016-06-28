@@ -13,7 +13,7 @@ namespace TransmogDB.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "201606261140509_init"; }
+            get { return "201606281016017_init"; }
         }
         
         string IMigrationMetadata.Source

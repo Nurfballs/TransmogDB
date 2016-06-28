@@ -18,6 +18,7 @@ namespace TransmogDB.Controllers
         public ActionResult Index()
         {
             //   return View(db.Transmogs.ToList());
+            ViewBag.totalAppearances = db.Transmogs.Count();
             return View(db.Transmogs.OrderBy(x => Guid.NewGuid()).Take(4).ToList());
         }
 
@@ -28,12 +29,55 @@ namespace TransmogDB.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+
             Transmog transmog = db.Transmogs.Find(id);
+ 
+
             if (transmog == null)
             {
                 return HttpNotFound();
             }
             return View(transmog);
+        }
+
+        // GET: Transmogs/Appearance
+        public ActionResult Appearance(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            
+
+            Transmog transmog = db.Transmogs.Find(id);
+            // List<TransmogItem> items = new List<TransmogItem>();
+            List<TransmogItem> items = db.Items.Where(i => i.TransmogID == id).ToList();
+
+            //foreach (TransmogItem item in db.Items.Where(i => i.TransmogID == id))
+            //{
+            //    items.Add(item);
+            //}
+
+
+            //Transmog transmog = db.Transmogs
+            //        .Where(t => t.ID == id)
+            //       .Include(t => t.Items)
+            //      .FirstOrDefault();
+
+           // List<TransmogItem> items = transmog.Items.ToList();
+
+            DetailViewModel model = new DetailViewModel(transmog, items);
+
+
+            if (transmog == null)
+            {
+                return HttpNotFound();
+            }
+
+            return View(model);
+            //return View();
+
         }
 
         // GET: Transmogs/Create
