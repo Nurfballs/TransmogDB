@@ -26,5 +26,12 @@ namespace TransmogDB.Controllers
 
             return View();
         }
+
+        public ActionResult List()
+        {
+
+            ViewBag.Message = "List";
+            return View();
+        }
     }
 }

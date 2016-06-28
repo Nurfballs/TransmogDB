@@ -1,0 +1,39 @@
+﻿@model IEnumerable<TransmogDB.Models.Transmog>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<div class="jumbotron">
+    <h1>Welcome!</h1>
+    <p class="lead">Transmog McFuckin' Database Yo!</p>
+    <p><a href="#" class="btn btn-primary btn-lg">How does it work? &raquo;</a></p>
+</div>
+
+
+<div class="row">
+    @foreach (var item in Model)
+    {
+        <div class="col-md-3">
+            <div class="card">
+                
+                <h4 class="card-header">@Html.DisplayFor(modelItem => item.Name)<small> of @Html.DisplayFor(modelItem => item.Realm)</small></h4>
+                <img class="img-fluid" src="@item.Image" />
+                <div class="card-block">
+                    <p class="card-text">
+                        <ul>
+                            <li>Item 1</li>
+                            <li>Item 2</li>
+                            <li>Item 3</li>
+                            <li>Item 4</li>
+                            <li>Item 5</li>
+                        </ul>
+                    </p>
+                </div>
+
+            </div>
+        </div>
+    }
+
+</div>
+
