@@ -20,13 +20,13 @@
 
                 <div class="card">
                     <div class="card-header">
-                        <h4><small>[@Html.DisplayFor(modelItem => item.ID)]</small> @Html.DisplayFor(modelItem => item.Name)</h4>
+                        <h4>@Html.DisplayFor(modelItem => item.Name)</h4>
                         <h6 class="text-muted">of @Html.DisplayFor(modelItem => item.Realm)</h6>
                     </div>
                     <img class="img-fluid" src="@item.Image" />
-                    <div class="card-block">
-                        
-                    </div>
+                        <div class="card-footer text-xs-center">
+                            <a href="/Transmog/Appearance/@item.ID" class="btn btn-primary">Details</a>
+                        </div>
 
                 </div>
 
