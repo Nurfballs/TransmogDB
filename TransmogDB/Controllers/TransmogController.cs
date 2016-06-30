@@ -14,12 +14,33 @@ namespace TransmogDB.Controllers
     {
         private TransmogDataContext db = new TransmogDataContext();
 
+
         // GET: Transmogs
         public ActionResult Index()
         {
-            //   return View(db.Transmogs.ToList());
+            // Get the top 10 transmog items
+            string query = "SELECT TOP 10 Count(ItemID) as ItemCount, Name, ItemID FROM TransmogItems WHERE Transmogrified = 1 GROUP BY Name, ItemID ORDER BY ItemCount Desc, Name ASC";
+            List<TransmogPopularItem> TransmogTopItems = (db.Database.SqlQuery<TransmogPopularItem>(query)).ToList();
+            
+            //ViewBag.ItemCount = TransmogTopItems.Count();
+            
+
+            // Select 4 random transmogs to display
+            List<Transmog> RandomTransmogs = db.Transmogs.OrderBy(x => Guid.NewGuid()).Take(4).ToList();
+
+            // Get total number of transmogs in the database
             ViewBag.totalAppearances = db.Transmogs.Count();
-            return View(db.Transmogs.OrderBy(x => Guid.NewGuid()).Take(4).ToList());
+
+
+            // Generate the model
+            HomeViewModel model = new HomeViewModel();
+            model.Appearance = RandomTransmogs;
+            model.PopularItems = TransmogTopItems;
+            //ViewBag.TopItems = TransmogTopItems.ToList();
+            //ViewBag.RandomTransmogs = RandomTransmogs.ToList();
+
+            //return View(RandomTransmogs);
+            return View(model);
         }
 
         // GET: Transmogs/Details/5

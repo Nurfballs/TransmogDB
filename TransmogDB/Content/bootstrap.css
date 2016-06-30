@@ -5351,6 +5351,8 @@ button.close {
 .carousel-inner > .carousel-item > img,
 .carousel-inner > .carousel-item > a > img {
   line-height: 1;
+  min-width: 100%;
+  max-height: 600px;
 }
 
 @media all and (transform-3d), (-webkit-transform-3d) {
