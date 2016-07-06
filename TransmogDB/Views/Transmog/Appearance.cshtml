@@ -16,8 +16,8 @@
                         </thead>
                         <tbody>
                             @foreach (var item in Model.Items)
-            {
-                                <tr>
+                            {
+                                <tr class="@(item.Transmogrified == true ? "active" : "" )">
                                     <td>@item.Slot</td>
                                     <td>@item.Transmogrified</td>
                                     <td><a href="//wowhead.com/item=@item.ItemID">@item.Name</a></td>
@@ -42,7 +42,11 @@
         </div>
     </div>
 
+    @{  
+        
+    }
+
     <div class="row">
-        <div class="col-md-12">Updated X days ago</div>
+        <div class="col-md-12">Updated @myHelper.GetTimeAgo(Model.Appearance.Updated)</div>
     </div>
 </div>

@@ -9,7 +9,7 @@ namespace TransmogDB.Migrations
     {
         public Configuration()
         {
-            AutomaticMigrationsEnabled = false;
+            AutomaticMigrationsEnabled = true;
         }
 
         protected override void Seed(TransmogDB.Models.TransmogDataContext context)

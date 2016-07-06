@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -18,8 +19,26 @@ namespace TransmogDB.Models
             return new string[] { "value1", "value2" };
         }
 
+        // GET: api/REST/Lookup
+        // http://localhost:50392/api/REST/Lookup?realm=Aggrama&character=Orwell
+        [System.Web.Mvc.HttpGet]
+        public string Lookup(string realm, string character)
+        {
+
+            return "FUCKER";
+            // Lookup the character
+            //if ((db.Database.SqlQuery<TransmogDataContext>($"SELECT COUNT(id) FROM Transmog WHERE Realm = {realm} AND Name = {character}").Count() > 0))
+            //{
+            //    return new HttpResponseMessage(HttpStatusCode.Found);
+            //}
+            //else
+            //{
+            //    return new HttpResponseMessage(HttpStatusCode.NotFound);
+            //}
+
+        }
+
         // GET: api/REST/5
-        
         public Transmog Get(int? id)
         {
 
@@ -36,7 +55,8 @@ namespace TransmogDB.Models
             return transmog;
         }
 
-        // POST: api/REST
+
+        // POST: api/REST/Add
         public HttpResponseMessage Add([FromBody]Transmog transmog)
         {
             HttpResponseMessage response = new HttpResponseMessage(HttpStatusCode.OK);
@@ -53,6 +73,7 @@ namespace TransmogDB.Models
 
             return response;
         }
+
 
         // PUT: api/REST/5
         public void Put(int id, [FromBody]string value)

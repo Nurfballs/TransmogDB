@@ -69,7 +69,9 @@ namespace TransmogDB.Models
          public List<TransmogItem> Items { get; set; }
         // public virtual List<TransmogItem> Items { get; set; }
 
-
+        [DataMember]
+        [Required]
+        public DateTime Updated { get; set; } = DateTime.Now;
     }
 
     //[Table("TransmogItems")]

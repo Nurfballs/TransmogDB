@@ -18,6 +18,7 @@ namespace TransmogDB
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Transmog", action = "Index", id = UrlParameter.Optional }
             );
+
         }
     }
 }

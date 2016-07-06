@@ -18,28 +18,27 @@ namespace TransmogDB.Controllers
         // GET: Transmogs
         public ActionResult Index()
         {
-            // Get the top 10 transmog items
-            string query = "SELECT TOP 10 Count(ItemID) as ItemCount, Name, ItemID FROM TransmogItems WHERE Transmogrified = 1 GROUP BY Name, ItemID ORDER BY ItemCount Desc, Name ASC";
+            // Get total number of transmogs in the database
+            ViewBag.totalAppearances = db.Transmogs.Count();
+
+            // Get the top 3 transmog items
+            string query = "SELECT TOP 3 Count(ItemID) as ItemCount, Name, ItemID FROM TransmogItems WHERE Transmogrified = 1 GROUP BY Name, ItemID ORDER BY ItemCount Desc";
             List<TransmogPopularItem> TransmogTopItems = (db.Database.SqlQuery<TransmogPopularItem>(query)).ToList();
-            
-            //ViewBag.ItemCount = TransmogTopItems.Count();
-            
+
+            // Get top 3 most transmogrieifed Realms
+            query = "SELECT TOP 3 Realm, Count(Realm) as RealmCount FROM Transmogs GROUP BY Realm ORDER BY RealmCount Desc";
+            List<TransmogPopularRealm> TransmogTopRealms = (db.Database.SqlQuery<TransmogPopularRealm>(query)).ToList();
 
             // Select 4 random transmogs to display
             List<Transmog> RandomTransmogs = db.Transmogs.OrderBy(x => Guid.NewGuid()).Take(4).ToList();
-
-            // Get total number of transmogs in the database
-            ViewBag.totalAppearances = db.Transmogs.Count();
 
 
             // Generate the model
             HomeViewModel model = new HomeViewModel();
             model.Appearance = RandomTransmogs;
             model.PopularItems = TransmogTopItems;
-            //ViewBag.TopItems = TransmogTopItems.ToList();
-            //ViewBag.RandomTransmogs = RandomTransmogs.ToList();
+            model.PopularRealms = TransmogTopRealms;
 
-            //return View(RandomTransmogs);
             return View(model);
         }
 
